@@ -1,27 +1,16 @@
-import express from 'express';
-import users from '../users.js';
-import router from './books.route.js';
+import { Router } from 'express';
+// import express from 'express';
+import { getAllUsers,signIn,signUp } from '../controllers/user.controller.js';
 
-router.get('/', (req, res) => {
-    res.json(users);
-})
+const router = Router();
+
+//הצגת כל המשתמשים
+router.get('/',getAllUsers)
 
 //הרשמת משתמש חדש
-router.post('/sign up', (req, res) => {
-    const {newUser}= req.body;
-    users.push(newUser);
-    res.status(201).json(newUser);
-})
+router.post('/sign up', signUp)
 
 //התחברות משתמש קיים
-router.post('/sign in', (req, res) => {
-    const {userEnter}= req.body;
-    const user = users.find(u => u.name === userEnter.name && u.pass === userEnter.pass);
-    if (user) {
-        res.status(200).json(user);
-    } else {
-        res.status(401).json({ message: 'Invalid credentials' });
-    }
-})
+router.post('/sign in',signIn)
 
 export default router;
