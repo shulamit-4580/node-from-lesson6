@@ -11,4 +11,4 @@ const bookSchema = new Schema({
     }
 })
 
-export default model('Books', bookSchema);
+export default model('books', bookSchema);

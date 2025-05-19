@@ -1,6 +1,5 @@
 import Books  from '../models/book.model.js';
 
-let booksList = [];
 
 //קבלת כל הספרים
 export const getAllBooks = async (req, res,next) => {
@@ -29,10 +28,10 @@ export const getBookById = async (req, res, next) => {
 //הוספת ספר חדש
 export const addBook = async (req, res,next) => {
     try{
-    const {name,price, categories, writer } = req.body;
-    const newBook = new Books({ name: name, price, categories, writer });
-    await newBook.save();
-    res.status(201).json(newBook);
+        const {name,price, categories, writer } = req.body;
+        const newBook = new Books({ name: name, price, categories, writer });
+        await newBook.save();
+        res.status(201).json(newBook);
     }
     catch (error) {
         next({ message: error.message });
@@ -60,9 +59,9 @@ export const updateBook=async (req, res,next) => {
 //מחיקת ספר לפי id
 export const deleteBook=async (req, res,next) => {
     try{
-    const {id}=req.params;
-    await Books.findByIdAndDelete(id);
-    res.status(204).end();
+        const {id}=req.params;
+        await Books.findByIdAndDelete(id);
+        res.status(204).end();
     } catch (error) {
         next({ message: error.message });
     }

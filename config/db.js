@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
+    const password=process.env.DB_PASSWORD;
     const DB_URI =process.env.DB_URI || 'mongodb://127.0.0.1/BookDB';
     try{
         await mongoose.connect(DB_URI);

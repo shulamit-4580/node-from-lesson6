@@ -1,16 +1,20 @@
 import { Router } from 'express';
 // import express from 'express';
-import { getAllUsers,signIn,signUp } from '../controllers/user.controller.js';
+import { getAllUsers,signIn,signUp,updateUser } from '../controllers/user.controller.js';
+import { checkAuth, checkAdmin } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
 //הצגת כל המשתמשים
-router.get('/',getAllUsers)
+router.get('/',checkAuth,checkAdmin,getAllUsers)
 
 //הרשמת משתמש חדש
-router.post('/sign up', signUp)
+router.post('/signUp', signUp)
 
 //התחברות משתמש קיים
-router.post('/sign in',signIn)
+router.post('/signIn',signIn)
+
+//עדכון משתמש לפי id
+router.put('/:id',checkAuth,updateUser)
 
 export default router;
